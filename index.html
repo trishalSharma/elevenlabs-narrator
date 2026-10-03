@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElevenLabs Narrator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="28" height="28" rx="8" fill="#7C3AED"/>
+          <path d="M8 8h3v12H8zM12.5 10h3v8h-3zM17 6h3v16h-3z" fill="white"/>
+        </svg>
+        <span>ElevenLabs <strong>Narrator</strong></span>
+      </div>
+      <div class="api-key-wrapper">
+        <input type="password" id="apiKey" placeholder="Paste your API key…" autocomplete="off" />
+        <span class="key-icon" title="Your key is never stored or sent anywhere except ElevenLabs">🔑</span>
+      </div>
+    </header>
+
+    <!-- Main card -->
+    <main class="card">
+
+      <!-- Text input -->
+      <section class="section">
+        <label class="section-label" for="textInput">Text to narrate</label>
+        <textarea
+          id="textInput"
+          class="text-area"
+          placeholder="Paste or type any text here…"
+          rows="8"
+          spellcheck="true"
+        ></textarea>
+        <div class="char-count"><span id="charCount">0</span> / 5,000 characters</div>
+      </section>
+
+      <!-- Controls row -->
+      <section class="controls-row">
+
+        <!-- Voice dropdown -->
+        <div class="control-group">
+          <label class="control-label" for="voiceSelect">Voice</label>
+          <div class="select-wrapper">
+            <select id="voiceSelect">
+              <option value="" disabled selected>— loading voices —</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+        </div>
+
+        <!-- Model dropdown -->
+        <div class="control-group">
+          <label class="control-label" for="modelSelect">Model</label>
+          <div class="select-wrapper">
+            <select id="modelSelect">
+              <option value="eleven_v4">Eleven v4 · Expressive (90+ langs)</option>
+              <option value="eleven_v4_turbo">Eleven v4 Turbo · Real-time (~100 ms)</option>
+              <option value="eleven_v3" selected>Eleven v3 · Character dialogue</option>
+              <option value="eleven_v3_conversational">Eleven v3 Conversational</option>
+              <option value="eleven_flash_v2_5">Flash v2.5 · Ultra-fast (~75 ms)</option>
+              <option value="eleven_multilingual_v2">Multilingual v2 · Long-form</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+        </div>
+
+        <!-- Stability / Similarity sliders -->
+        <div class="control-group slider-group">
+          <label class="control-label">Stability <span id="stabilityVal">0.5</span></label>
+          <input type="range" id="stability" min="0" max="1" step="0.05" value="0.5" />
+        </div>
+
+        <div class="control-group slider-group">
+          <label class="control-label">Similarity <span id="similarityVal">0.75</span></label>
+          <input type="range" id="similarity" min="0" max="1" step="0.05" value="0.75" />
+        </div>
+
+      </section>
+
+      <!-- Action bar -->
+      <section class="action-bar">
+        <button id="playBtn" class="btn btn-play" disabled>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <span id="playLabel">Generate &amp; Play</span>
+        </button>
+
+        <button id="stopBtn" class="btn btn-stop" disabled>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="6" y="6" width="12" height="12" rx="2"/>
+          </svg>
+          Stop
+        </button>
+
+        <button id="downloadBtn" class="btn btn-download" disabled>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 20h14v-2H5v2zm7-18v10.17l-3.59-3.58L7 10l5 5 5-5-1.41-1.41L13 12.17V2h-1z"/>
+          </svg>
+          Download
+        </button>
+      </section>
+
+      <!-- Status / waveform area -->
+      <section class="audio-section" id="audioSection" hidden>
+        <div class="waveform-container" id="waveformContainer">
+          <canvas id="waveCanvas"></canvas>
+        </div>
+        <audio id="audioPlayer" controls></audio>
+      </section>
+
+      <!-- Status bar -->
+      <div id="statusBar" class="status-bar"></div>
+
+    </main>
+
+    <footer class="app-footer">
+      Audio is processed by the <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs API</a>.
+      Your API key is used client-side only and never stored.
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

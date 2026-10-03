@@ -1,0 +1,323 @@
+/* ─── Reset & Base ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0f0f13;
+  --surface:   #1a1a24;
+  --surface2:  #22222f;
+  --border:    #2e2e40;
+  --accent:    #7c3aed;
+  --accent-lt: #9d5af5;
+  --accent-glow: rgba(124,58,237,.35);
+  --success:   #22c55e;
+  --danger:    #ef4444;
+  --muted:     #6b7280;
+  --text:      #e5e7eb;
+  --text-dim:  #9ca3af;
+  --radius:    14px;
+  --radius-sm: 8px;
+  --shadow:    0 8px 32px rgba(0,0,0,.55);
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* ─── App Wrapper ──────────────────────────────────────────────── */
+.app-wrapper {
+  width: 100%;
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ─── Header ───────────────────────────────────────────────────── */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  color: var(--text);
+  letter-spacing: -.3px;
+}
+.logo strong { color: var(--accent-lt); }
+
+.api-key-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  flex: 1;
+  max-width: 340px;
+}
+
+.api-key-wrapper input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: .9rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: .04em;
+}
+.api-key-wrapper input::placeholder { color: var(--muted); font-family: 'Segoe UI', sans-serif; letter-spacing: 0; }
+
+.key-icon { font-size: 1rem; cursor: help; }
+
+/* ─── Card ─────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ─── Section label ────────────────────────────────────────────── */
+.section-label {
+  display: block;
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+/* ─── Textarea ─────────────────────────────────────────────────── */
+.text-area {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: .97rem;
+  line-height: 1.65;
+  padding: 14px 16px;
+  resize: vertical;
+  outline: none;
+  transition: border-color .2s;
+}
+.text-area:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.text-area::placeholder { color: var(--muted); }
+
+.char-count {
+  text-align: right;
+  font-size: .78rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.char-count.over { color: var(--danger); }
+
+/* ─── Controls Row ─────────────────────────────────────────────── */
+.controls-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.control-group { display: flex; flex-direction: column; gap: 8px; }
+.control-label {
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Selects */
+.select-wrapper {
+  position: relative;
+}
+.select-wrapper select {
+  width: 100%;
+  appearance: none;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: .9rem;
+  padding: 10px 36px 10px 12px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.select-wrapper select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.select-wrapper select option { background: var(--surface2); color: var(--text); }
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+/* Sliders */
+.slider-group { justify-content: center; }
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: 99px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  cursor: pointer;
+  transition: background .2s;
+}
+input[type="range"]:hover::-webkit-slider-thumb { background: var(--accent-lt); }
+
+/* ─── Action Bar ───────────────────────────────────────────────── */
+.action-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .15s, transform .1s, box-shadow .2s;
+}
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+.btn:not(:disabled):hover { opacity: .9; transform: translateY(-1px); }
+.btn:not(:disabled):active { transform: translateY(0); }
+.btn-icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+.btn-play {
+  background: linear-gradient(135deg, var(--accent), var(--accent-lt));
+  color: #fff;
+  box-shadow: 0 4px 16px var(--accent-glow);
+  flex: 1;
+  justify-content: center;
+}
+.btn-play.loading {
+  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{box-shadow:0 4px 16px var(--accent-glow)} 50%{box-shadow:0 4px 28px rgba(124,58,237,.65)} }
+
+.btn-stop {
+  background: var(--surface2);
+  color: var(--danger);
+  border: 1px solid var(--border);
+}
+.btn-stop:not(:disabled):hover { background: rgba(239,68,68,.12); }
+
+.btn-download {
+  background: var(--surface2);
+  color: var(--success);
+  border: 1px solid var(--border);
+}
+.btn-download:not(:disabled):hover { background: rgba(34,197,94,.12); }
+
+/* ─── Audio Section ────────────────────────────────────────────── */
+.audio-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeIn .35s ease;
+}
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+.waveform-container {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  height: 64px;
+}
+#waveCanvas { width: 100%; height: 100%; display: block; }
+
+audio {
+  width: 100%;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  outline: none;
+  filter: invert(1) hue-rotate(200deg) brightness(.85);
+}
+
+/* ─── Status Bar ───────────────────────────────────────────────── */
+.status-bar {
+  font-size: .82rem;
+  min-height: 20px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.status-bar.error   { color: var(--danger); }
+.status-bar.success { color: var(--success); }
+.status-bar.info    { color: var(--accent-lt); }
+
+/* spinner */
+.spinner {
+  width: 14px; height: 14px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent-lt);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Footer ───────────────────────────────────────────────────── */
+.app-footer {
+  text-align: center;
+  font-size: .77rem;
+  color: var(--muted);
+}
+.app-footer a { color: var(--accent-lt); text-decoration: none; }
+.app-footer a:hover { text-decoration: underline; }
+
+/* ─── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 540px) {
+  .controls-row { grid-template-columns: 1fr; }
+  .action-bar { flex-direction: column; }
+  .api-key-wrapper { max-width: 100%; }
+}
